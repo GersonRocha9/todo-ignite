@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import { FiCheckSquare, FiTrash } from "react-icons/fi";
 
-import { useToasts } from "react-toast-notifications";
-
 import "../styles/tasklist.scss";
 
 interface Task {
@@ -15,8 +13,6 @@ export function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
 
-  const { addToast, removeToast, removeAllToasts, updateToast, toastStack } = useToasts();
-
   useEffect(() => {
     const savedTasks = localStorage.getItem("tasks");
     if (savedTasks) {
@@ -26,7 +22,7 @@ export function TaskList() {
 
   function handleCreateNewTask() {
     if (newTaskTitle.trim() === "") {
-      addToast("Por favor, adicione um título na tarefa.", { appearance: "error" });
+      alert("Por favor, digite um título para a tarefa.");
     } else {
       const newTask: Task = {
         id: tasks.length + 1,
